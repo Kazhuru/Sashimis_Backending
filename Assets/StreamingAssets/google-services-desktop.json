@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "3392477032",
+    "project_id": "sashimis-backending",
+    "storage_bucket": "sashimis-backending.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:3392477032:android:9a7eea4ac7b111eee1a8dd",
+        "android_client_info": {
+          "package_name": "com.sashimis.backending"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaaZRYB8kp1Vh7iUZoZQqRiJLK2AvadtQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
