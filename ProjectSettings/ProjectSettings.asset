@@ -154,7 +154,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.UnityTechnologies.com.unity.template.urpblank
+    Android: com.sashimis.backending
     Standalone: com.sashimis.backending
     iPhone: com.Unity-Technologies.com.unity.template.urp-blank
   buildNumber:
