@@ -12,7 +12,7 @@ namespace SashimisBackending.UI
         [SerializeField] private TMP_InputField _inputName;
         [SerializeField] private TMP_InputField _inputDescription;
         [SerializeField] private TMP_InputField _inputCost;
-        
+
         public void CreateSushiButton()
         {
             string name = _inputName.text;

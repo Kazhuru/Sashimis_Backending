@@ -1,3 +1,4 @@
+using SashimisBackending.Database;
 using SashimisBackending.Datamodels;
 
 namespace SashimisBackending.Controllers
@@ -11,11 +12,13 @@ namespace SashimisBackending.Controllers
             string id = DatabaseFirebaseImpl.GetIdForNewEntry(TABLE_NAME);
             Sushi sushi = new Sushi(id, name, description, cost);
 
-            DatabaseFirebaseImpl.SetData(TABLE_NAME, sushi.Id, sushi);
-
-            // Save on DataManager...
+            DatabaseFirebaseImpl.SetData(TABLE_NAME, sushi.Id, sushi, isSuccessfully => 
+            { 
+                if(isSuccessfully)
+                {
+                    // Save on DataManager...
+                }
+            });
         }
     }
 }
-
-

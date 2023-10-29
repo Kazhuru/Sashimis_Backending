@@ -5,22 +5,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using SashimisBackending.Datamodels;
+using System.Threading.Tasks;
 
-public class DatabaseFirebaseImpl
+namespace SashimisBackending.Database
 {
-    public static string GetIdForNewEntry(string collection)
+    public class DatabaseFirebaseImpl
     {
-        FirebaseFirestore _database = FirebaseFirestore.DefaultInstance;
+        public static string GetIdForNewEntry(string collection)
+        {
+            FirebaseFirestore _database = FirebaseFirestore.DefaultInstance;
 
-        DocumentReference docRef = _database.Collection(collection).Document();
-        return docRef.Id;
-    }
+            DocumentReference docRef = _database.Collection(collection).Document();
+            return docRef.Id;
+        }
 
-    internal static void SetData(string collection, string documentId, object data)
-    {
-        FirebaseFirestore _database = FirebaseFirestore.DefaultInstance;
-
-        DocumentReference docRef = _database.Collection(collection).Document(documentId);
-        docRef.SetAsync(data);
+        public static void SetData(string collection, string documentId, object data, Action<bool> sucessCallback = null)
+        {
+            FirebaseFirestore _database = FirebaseFirestore.DefaultInstance;
+            DocumentReference docRef = _database.Collection(collection).Document(documentId);
+            docRef.SetAsync(data).ContinueWithOnMainThread(task => 
+            {
+                if (task.IsCompletedSuccessfully)
+                {
+                    Debug.Log("Task was successfull");
+                    sucessCallback(true);
+                }
+                else if (task.IsFaulted)
+                {
+                    Debug.Log("Task was faulted: " + task.Exception.ToString());
+                    sucessCallback(false);
+                }
+                else if (task.IsCanceled)
+                {
+                    Debug.Log("Task was canceled");
+                    sucessCallback(false);
+                }
+            });
+        }
     }
 }
