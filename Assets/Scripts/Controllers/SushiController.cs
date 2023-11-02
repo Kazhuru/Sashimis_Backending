@@ -16,7 +16,7 @@ namespace SashimisBackending.Controllers
             { 
                 if(isSuccessfully)
                 {
-                    // Save on DataManager...
+                    DataManager.Instance.AddSushiToList(sushi);
                 }
             });
         }

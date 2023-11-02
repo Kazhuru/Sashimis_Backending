@@ -1,7 +1,9 @@
 using Firebase.Firestore;
+using System;
 
 namespace SashimisBackending.Datamodels
 {
+    [Serializable]
     [FirestoreData]
     public class Sushi
     {
