@@ -9,6 +9,7 @@ public class DataManager : MonoBehaviour
 {
     public static DataManager Instance;
 
+
     private void Awake()
     {
         if(Instance != null &&  Instance != this)
@@ -26,9 +27,12 @@ public class DataManager : MonoBehaviour
 
     public const string TABLE_SUSHI = "Sushi";
 
+
     void Start()
     {
         ObtainSushisList();
+        PrintSushiName("bzCsD8jthQba70mNkWSI");
+
         
 
         _shushisCollection = new List<Sushi>();
@@ -40,6 +44,14 @@ public class DataManager : MonoBehaviour
         {
             Debug.Log("Got all Sushis!");
             _shushisCollection = callbackResult;
+        });
+    }
+
+    private void PrintSushiName( string sushiID)
+    {
+        DatabaseFirebaseImpl.GetDocument<Sushi>(TABLE_SUSHI, sushiID, sushi =>
+        {
+            Debug.Log(sushi.Name);
         });
     }
 

@@ -7,6 +7,7 @@ using System;
 using SashimisBackending.Datamodels;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace SashimisBackending.Database
 {
@@ -60,6 +61,30 @@ namespace SashimisBackending.Database
                         resultList.Add(dataDocument);
                     }
                     callbackResult(resultList);
+                }
+            });
+        }
+
+        public static void GetDocument<T>(string collection, string documentId, Action<T> callbackResult)
+        {
+            FirebaseFirestore _database = FirebaseFirestore.DefaultInstance;
+            DocumentReference documentRefer = _database.Collection(collection).Document(documentId);
+            documentRefer.GetSnapshotAsync().ContinueWithOnMainThread(task =>
+            {
+                DocumentSnapshot snapshot = task.Result;
+                if (task.IsCompletedSuccessfully)
+                {
+                    Debug.Log("Task was successfull");
+                    var result = snapshot.ConvertTo<T>();
+                    callbackResult(result);
+                }
+                else if (task.IsFaulted)
+                {
+                    Debug.Log("Task was faulted: " + task.Exception.ToString());                   
+                }
+                else if (task.IsCanceled)
+                {
+                    Debug.Log("Task was canceled");                    
                 }
             });
         }
