@@ -8,6 +8,7 @@ using System;
 public class DataManager : MonoBehaviour
 {
     public static DataManager Instance;
+    [SerializeField] private InstanceObject objectInstancer;
 
 
     private void Awake()
@@ -31,11 +32,7 @@ public class DataManager : MonoBehaviour
     void Start()
     {
         ObtainSushisList();
-        PrintSushiName("bzCsD8jthQba70mNkWSI");
-
-        
-
-        _shushisCollection = new List<Sushi>();
+        PrintSushiName("bzCsD8jthQba70mNkWSI");      
     }
 
     private void ObtainSushisList()
@@ -44,7 +41,13 @@ public class DataManager : MonoBehaviour
         {
             Debug.Log("Got all Sushis!");
             _shushisCollection = callbackResult;
+            InitCards();
         });
+    }
+
+    private void InitCards()
+    {
+        objectInstancer.Instanciate(_shushisCollection); 
     }
 
     private void PrintSushiName( string sushiID)
